@@ -12,9 +12,14 @@ const correoSchema =  Schema({
         required: [true,"El destinatario es obligatorio"]
     },
 
-    correo:{
+    nombre: {
         type: String,
-        required: [true,"El correo es obligatorio"]
+        required: [true, "El nombre es obligatorio"]
+    },
+
+    msg:{
+        type: String,
+        required: [true,"El mensaje es obligatorio"]
     },
     
     fecha: {
@@ -33,4 +38,4 @@ correoSchema.methods.toJSON = function(){
     return data;
 }
 
-module.exports = model
+module.exports = model('Correo', correoSchema);

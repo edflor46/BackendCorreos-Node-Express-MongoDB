@@ -1,11 +1,20 @@
-
+const Correo = require('../models/correo');
 
 /* -------------------------------------------------------------------------- */
 /*                                 SEND CORREO                                */
 /* -------------------------------------------------------------------------- */
-const sendCorreo = ()=> {
+const sendCorreo = (req, res)=> {
+
+    /*==========REQ==========*/
+    const {destinatario, nombre, msg,  } = req.body;
+    const correo = new Correo({destinatario, nombre, msg});
+
+    /*==========SAVE MONGODB==========*/
+    correo.save();
+
+    /*==========RES==========*/
     res.json({
-        msg: 'Send Correo'
+        correo
     })
 }
 

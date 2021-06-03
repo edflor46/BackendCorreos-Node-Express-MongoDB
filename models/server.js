@@ -1,6 +1,7 @@
 
 const express = require('express');
 const cors = require('cors');
+const { dbConnection } = require('../db/config');
 
 require('colors');
 
@@ -25,6 +26,9 @@ class Server {
 
         /*==========ROUTES==========*/
         this.routes();
+
+        /*==========CONECTION MONGO==========*/
+        this.conectarDB();
     }
 
     /* -------------------------------------------------------------------------- */
@@ -47,7 +51,14 @@ class Server {
     /* -------------------------------------------------------------------------- */
 
     routes() {
-        this.app.use(this.paths, require('../routes/correos.route'));
+        this.app.use(this.paths.correos, require('../routes/correos.route'));
+    }
+
+    /* -------------------------------------------------------------------------- */
+    /*                                  MONGO DB                                  */
+    /* -------------------------------------------------------------------------- */
+    async conectarDB(){
+        await dbConnection();
     }
 
     /* -------------------------------------------------------------------------- */
