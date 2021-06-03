@@ -1,5 +1,6 @@
 
 const { Schema, model } = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 /* -------------------------------------------------------------------------- */
 /*                               ESCHEMA CORREO                               */
@@ -29,10 +30,10 @@ const correoSchema =  Schema({
 
 });
 
-/* -------------------------------------------------------------------------- */
-/*                                 RETURN DATA                                */
-/* -------------------------------------------------------------------------- */
+/*==========PAGINATE==========*/
+correoSchema.plugin(mongoosePaginate);
 
+/*==========RETURN DATA==========*/
 correoSchema.methods.toJSON = function(){
     const {__v, ...data} = this.toObject();
     return data;

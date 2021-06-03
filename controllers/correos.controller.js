@@ -3,11 +3,11 @@ const Correo = require('../models/correo');
 /* -------------------------------------------------------------------------- */
 /*                                 SEND CORREO                                */
 /* -------------------------------------------------------------------------- */
-const sendCorreo = (req, res)=> {
+const sendCorreo = (req, res) => {
 
     /*==========REQ==========*/
-    const {destinatario, nombre, msg,  } = req.body;
-    const correo = new Correo({destinatario, nombre, msg});
+    const { destinatario, nombre, msg, } = req.body;
+    const correo = new Correo({ destinatario, nombre, msg });
 
     /*==========SAVE MONGODB==========*/
     correo.save();
@@ -22,10 +22,36 @@ const sendCorreo = (req, res)=> {
 /*                                   GET ALL                                  */
 /* -------------------------------------------------------------------------- */
 
-const getCorreos = () => {
-    res.json({
-        msg: 'Get Correos'
-    })
+const getCorreos = async (req, res) => {
+
+    /*==========REQ QUERY==========*/
+    const { limit = 5, page = 1 } = parseInt(req.query);
+
+    /*==========CUSTOMIZE LABELS==========*/
+    const myCustomLabels = {
+        totalDocs: 'total',
+        docs: 'correos',
+        limit: 'perPage',
+        page: 'currentPage',
+        nextPage: 'next',
+        prevPage: 'prev',
+        totalPages: 'totalPages',
+        pagingCounter: 'slNo',
+        meta: 'paginator',
+    };
+
+    /*==========OPTIONS==========*/
+    const options = {
+        limit,
+        page,
+        customLabels: myCustomLabels
+    }
+
+    /*==========DATA==========*/
+    const correos = await Correo.paginate({}, options);
+
+    /*==========RES==========*/
+    res.json(correos);
 }
 
 /* -------------------------------------------------------------------------- */

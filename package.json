@@ -19,6 +19,7 @@
     "googleapis": "^74.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.12",
+    "mongoose-paginate-v2": "^1.3.18",
     "nodemailer": "^6.6.1"
   }
 }
