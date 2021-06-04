@@ -58,10 +58,16 @@ const getCorreos = async (req, res) => {
 /*                                 GET FOR ONE                                */
 /* -------------------------------------------------------------------------- */
 
-const getCorreo = () => {
+const getCorreo = async(req, res) => {
+
+    /*==========ID==========*/
+    const { id } = req.params;
+
+    /*==========SEARCH ID=========*/
+    const correo = await Correo.findById(id);
     res.json({
-        msg: 'get Correo'
-    })
+        correo
+    });
 
 }
 
