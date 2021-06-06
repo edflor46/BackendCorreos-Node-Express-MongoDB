@@ -18,6 +18,11 @@ const correoSchema =  Schema({
         required: [true, "El nombre es obligatorio"]
     },
 
+    asunto: {
+        type: String,
+        required:[true, "El asunto es obligatorio"]
+    },
+
     msg:{
         type: String,
         required: [true,"El mensaje es obligatorio"]

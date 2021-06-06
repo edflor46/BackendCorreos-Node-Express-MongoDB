@@ -13,6 +13,7 @@ const router = Router();
 router.post('/', [
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
     check('destinatario', 'Ingresa un correo valido').isEmail(),
+    check('asunto', 'El asunto es obligatorio').not().isEmpty(),
     check('msg', 'El mensaje es obligatorio').not().isEmpty(),
     validarCampos
 ],
